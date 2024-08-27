@@ -1,0 +1,30 @@
+.card{
+  display:flex;
+  flex-direction: column;
+  border-radius: 15px;
+  border: 1px solid black;
+  padding: 10px;
+  width: calc(100vw/8);
+  min-width: 120px;
+  justify-content: space-between;
+}
+
+
+.card>img{
+  width: 80px; 
+  height: 80px;
+
+  margin: 0 auto;
+}
+
+.card:hover{
+  cursor: pointer;
+  border: 3px solid black;
+  width: calc(100vw / 8 - 4px);
+}
+
+.details{
+  display: flex;
+  justify-content: end;
+  flex-direction: column; 
+}
