@@ -11,11 +11,11 @@ export default function NewProduct() {
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   let { id } = useParams();
-  let mode = "";
+  const [mode, setMode] = useState("add");
 
   useEffect(() => {
     if (id) {
-      mode = "edit";
+      setMode("edit");
       getById(id)
         .then((res) => {
           setProduct(res.data);
@@ -23,15 +23,16 @@ export default function NewProduct() {
         .catch((er) => {
           // TODO: toast error
         });
-    } else {
-      mode = "add";
     }
   }, []);
 
-  console.log("New Product: " + JSON.stringify(product));
-  function save() {
+  function save(data) {
+    // TODO: Toast
     back();
-    J;
+  }
+
+  function deleteProduct(){
+    //TODO: Toast
   }
 
   function back() {
@@ -39,6 +40,12 @@ export default function NewProduct() {
   }
 
   return (
-    <>{product != null ? <ProductForm product={product}></ProductForm> : ""}</>
+    <>{
+      mode == "edit" && product != null ? 
+        <ProductForm back={back}  mode={mode} save={(data)=>save(data)} product={product}></ProductForm> : 
+        mode == 'add' ? 
+        <ProductForm  mode={mode} back={back} save={(data)=>save(data)}></ProductForm> : ""
+    }
+    </>
   );
 }

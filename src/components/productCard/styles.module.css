@@ -20,7 +20,7 @@
 .card:hover{
   cursor: pointer;
   border: 3px solid black;
-  width: calc(100vw / 8 - 4px);
+  width: calc(100vw / 8 - 2px);
 }
 
 .details{

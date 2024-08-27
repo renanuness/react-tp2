@@ -28,6 +28,10 @@ export default function ProductDetail(props) {
     navigate("../new-product/" + product.id);
   }
 
+  function deleteProduct(){
+    
+  }
+
   return (
     <div className={styles.container}>
       <p className={styles.backBtn} onClick={home}>
@@ -44,9 +48,14 @@ export default function ProductDetail(props) {
         <p>{product.description}</p>
         <p>R$ {product.price}</p>
         <p>Avaliação: {product.rating}</p>
-        <button className={styles.editBtn} onClick={edit}>
-          Editar
-        </button>
+        <div className={styles.buttonsContainer}>
+          <button className={styles.editBtn} onClick={edit}>
+            Editar
+          </button>
+          <button className={styles.deleteBtn} onClick={deleteProduct}>
+            Excluir
+          </button>
+        </div>
       </div>
     </div>
   );
