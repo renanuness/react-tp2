@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getById } from "../../services/apiService";
+import { deleteById, getById } from "../../services/apiService";
 import { useNavigate, useParams } from "react-router-dom";
 
 import styles from "./styles.module.css";
@@ -29,7 +29,14 @@ export default function ProductDetail(props) {
   }
 
   function deleteProduct(){
-    
+    //TODO: Modal
+    deleteById(product.id).then(
+      res=>{
+        //TODO: Toast e redirect
+      }
+    ).catch(error=>{
+      // TODO: Toast
+    });
   }
 
   return (

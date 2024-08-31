@@ -11,7 +11,7 @@ const schema = yup
     title: yup.string().required("Título é obrigatório"),
     brand: yup.string(),
     description: yup.string().required("Descrição é obrigatória"),
-    price: yup.number().positive().required("Preço é obrigatório"),
+    price: yup.number("O preço precisa ser um valor numérico").positive("Preço precisa ser positivo").required("Preço é obrigatório"),
   })
   .required();
 
