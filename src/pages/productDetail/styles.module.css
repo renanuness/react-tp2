@@ -34,11 +34,21 @@
   font-size: 1.5rem;
   padding: 10px;
 }
-
+.editBtn:hover{
+  background-color: rgba(48, 199, 11, 0.67);
+  border: 1px solid rgb(134, 248, 3);
+  color: white;
+}
 .deleteBtn{
   background-color: rgba(199, 29, 23, 0.67);
   border: 1px solid black;
   border-radius: 10px;
   font-size: 1.5rem;
   padding: 10px;
+}
+
+.deleteBtn:hover{
+  background-color: rgba(221, 18, 11, 0.67);
+  border: 1px solid rgb(255, 0, 0);
+  color: white;
 }

@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { deleteById, getById } from "../../services/apiService";
 import { useNavigate, useParams } from "react-router-dom";
 
 import styles from "./styles.module.css";
+import { ToastContext } from "../../App";
+
 
 export default function ProductDetail(props) {
+  const { notifyError, notifySuccess } = useContext(ToastContext);
   const navigate = useNavigate();
   let { id } = useParams();
   const [product, setProduct] = useState({});
@@ -28,14 +31,16 @@ export default function ProductDetail(props) {
     navigate("../new-product/" + product.id);
   }
 
-  function deleteProduct(){
+  function deleteProduct() {
     //TODO: Modal
     deleteById(product.id).then(
-      res=>{
-        //TODO: Toast e redirect
+      res => {
+        notifySuccess("Produto excluído com sucesso");
+        navigate("/");
       }
-    ).catch(error=>{
-      // TODO: Toast
+    ).catch(error => {
+      notifyError("Erro");
+
     });
   }
 
