@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { getAll } from "../../services/apiService";
 import { useState } from "react";
 import ProductCard from "../../components/productCard";
 import styles from "./styles.module.css";
 import { useNavigate } from "react-router-dom";
+import { ToastContext } from "../../App";
 
 export default function Home() {
+  const {notifySuccess, notifyError} = useContext(ToastContext);
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
@@ -16,7 +18,7 @@ export default function Home() {
         setProducts(res.data.products);
       })
       .catch((er) => {
-        //TODO: Toast
+        notifyError("rro ao buscar produtos.")
         return { error: er, msg: "Erro ao buscar produtos na API." };
       });
   }, []);

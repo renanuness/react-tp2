@@ -3,8 +3,9 @@ import styles from "./styles.module.css";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FormInput from "../formInput";
+import { ToastContext } from "../../App";
 
 const schema = yup
   .object({
@@ -16,6 +17,7 @@ const schema = yup
   .required();
 
 export default function ProductForm(props) {
+  const {notifySuccess, notifyError} = useContext(ToastContext);
   const [product, setProduct] = useState(props.product);
   let { id } = useParams();
   let mode = "";
@@ -38,7 +40,6 @@ export default function ProductForm(props) {
   }, [product]);
 
   const onSubmit = (data) => {
-    //TODO: Add toast
     props.save(data);
     console.log(data);
   };

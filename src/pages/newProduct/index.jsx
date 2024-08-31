@@ -3,11 +3,14 @@ import styles from "./styles.module.css";
 import * as yup from "yup";
 import { useController, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getById } from "../../services/apiService";
 import ProductForm from "../../components/productForm";
+import axios from "axios";
+import { ToastContext } from "../../App";
 
 export default function NewProduct() {
+  const {notifySuccess, notifyError} = useContext(ToastContext);
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   let { id } = useParams();
@@ -21,18 +24,19 @@ export default function NewProduct() {
           setProduct(res.data);
         })
         .catch((er) => {
-          // TODO: toast error
+          notifyError("Erro ao buscar produto")
         });
     }
   }, []);
 
   function save(data) {
-    // TODO: Toast
+    axios.post('https://dummyjson.com/products/add', {body:{data}})
+    .then(res=>{
+      notifySuccess("Produto criado com sucesso");
+    }).catch(error=>{
+      notifyError("Erro ao criar produto");
+    });
     back();
-  }
-
-  function deleteProduct(){
-    //TODO: Toast
   }
 
   function back() {
