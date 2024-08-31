@@ -1,16 +1,24 @@
+import React, { useEffect, useState } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import "./App.css";
+import { toast, ToastContainer } from "react-toastify";
+
+import Login from "./pages/login";
 import Home from "./pages/home";
 import ProductDetail from "./pages/productDetail";
 import NewProduct from "./pages/newProduct";
-import { toast, ToastContainer } from "react-toastify";
-import React from "react";
+
+import "./App.css";
 
 import 'react-toastify/dist/ReactToastify.css';
+import  { getUserLogged } from "./services/userLogged";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Login></Login>,
+  },
+  {
+    path: "/home",
     element: <Home></Home>,
   },
   {
@@ -27,23 +35,48 @@ const router = createBrowserRouter([
   },
 ]);
 
-export const ToastContext = React.createContext(null);
+export const ApplicationContext = React.createContext(null);
 
 export default function App() {
-  const notifyError = (msg)=> toast(msg, {
+  const [user, setUser] = useState(null);
+  const [theme, setTheme] = useState("light");
+
+  let styleClass = `${theme} container`;
+
+  const notifyError = (msg) => toast(msg, {
     type: "error"
   });
 
-  const notifySuccess = (msg)=> toast(msg, {
+  const notifySuccess = (msg) => toast(msg, {
     type: "success"
   });
 
+  function setUserLogged(user) {
+    setUser(user);
+  }
+
+  useEffect(()=>{
+    let currentTheme = localStorage.getItem("@theme");
+    if(currentTheme){
+      setTheme(currentTheme);
+    }
+  },[]);
+
+  function changeTheme() {
+    if (theme == "light") {
+      localStorage.setItem("@theme","dark");
+      setTheme("dark");
+    } else {
+      setTheme("light");
+      localStorage.setItem("@theme","light");
+    }
+  }
   return (
-    <main>
-      <ToastContext.Provider value={{notifyError:notifyError, notifySuccess}}>
+    <main className={styleClass}>
+      <ApplicationContext.Provider value={{ notifyError, notifySuccess, user, setUserLogged, changeTheme }}>
         <RouterProvider router={router} />
         <ToastContainer ></ToastContainer>
-      </ToastContext.Provider>
+      </ApplicationContext.Provider>
     </main>
   );
 }

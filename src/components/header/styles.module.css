@@ -1,0 +1,21 @@
+.container{
+    height: 80px;
+    border: 1px solid #9a9a9a;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 25px;
+    padding-right: 30px;
+}
+
+.btnDark{
+    color: rgba(187, 185, 185, 0.87);
+    background-color: #232323;
+
+}
+
+.btnLight{
+    background-color: rgba(187, 185, 185, 0.87);
+    color: #232323;
+}

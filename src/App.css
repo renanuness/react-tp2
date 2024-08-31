@@ -3,3 +3,17 @@
   box-sizing: border-box;
   padding: 0;
 }
+
+.container{
+  min-height: 100vh;
+}
+
+.dark{
+  background-color: rgba(48, 45, 45, 0.829);
+  color:#ABABAB;
+}
+
+.ligth{
+  color: rgba(48, 45, 45, 0.829);
+  background-color:#ABABAB;
+}

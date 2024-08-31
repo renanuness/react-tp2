@@ -7,7 +7,7 @@ export default function ProductCard(props) {
   const product = props.product;
 
   function detail() {
-    navigate("product/" + product.id);
+    navigate("/product/" + product.id);
   }
 
   return (

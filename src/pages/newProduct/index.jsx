@@ -7,10 +7,11 @@ import { useContext, useEffect, useState } from "react";
 import { getById } from "../../services/apiService";
 import ProductForm from "../../components/productForm";
 import axios from "axios";
-import { ToastContext } from "../../App";
+import { ApplicationContext } from "../../App";
+import Header from "../../components/header";
 
 export default function NewProduct() {
-  const {notifySuccess, notifyError} = useContext(ToastContext);
+  const {notifySuccess, notifyError, user} = useContext(ApplicationContext);
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   let { id } = useParams();
@@ -44,7 +45,9 @@ export default function NewProduct() {
   }
 
   return (
-    <>{
+    <>
+      <Header/>
+    {
       mode == "edit" && product != null ? 
         <ProductForm back={back}  mode={mode} save={(data)=>save(data)} product={product}></ProductForm> : 
         mode == 'add' ? 

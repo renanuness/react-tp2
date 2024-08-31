@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext, useEffect, useState } from "react";
 import FormInput from "../formInput";
-import { ToastContext } from "../../App";
+import { ApplicationContext } from "../../App";
 
 const schema = yup
   .object({
@@ -17,7 +17,7 @@ const schema = yup
   .required();
 
 export default function ProductForm(props) {
-  const {notifySuccess, notifyError} = useContext(ToastContext);
+  const {notifySuccess, notifyError} = useContext(ApplicationContext);
   const [product, setProduct] = useState(props.product);
   let { id } = useParams();
   let mode = "";
