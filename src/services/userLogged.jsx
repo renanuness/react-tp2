@@ -12,7 +12,7 @@ export function getUserLogged() {
     }
 }
 
-export function setLocalStorageInfo({ user }) {
+export function setLocalStorageInfo(user) {
     localStorage.setItem("@email", user.email);
     localStorage.setItem("@name", user.name);
     localStorage.setItem("@token", user.token);

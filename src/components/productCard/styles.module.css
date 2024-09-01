@@ -1,8 +1,17 @@
+.container{
+  display:flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 10px;
+  width: calc(100vw/8);
+  justify-content: space-between;
+
+}
+
 .card{
   display:flex;
   flex-direction: column;
-  border-radius: 15px;
-  border: 1px solid black;
   padding: 10px;
   width: calc(100vw/8);
   min-width: 120px;
@@ -17,7 +26,7 @@
   margin: 0 auto;
 }
 
-.card:hover{
+.container:hover{
   cursor: pointer;
   border: 3px solid black;
   width: calc(100vw / 8 - 2px);
@@ -27,4 +36,8 @@
   display: flex;
   justify-content: end;
   flex-direction: column; 
+}
+
+.saved{
+  background-color:goldenrod;
 }

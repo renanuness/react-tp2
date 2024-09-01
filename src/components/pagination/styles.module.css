@@ -1,0 +1,14 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.container button{
+    padding:4px;
+}
+
+.selected{
+    border: 2px solid black;
+}
