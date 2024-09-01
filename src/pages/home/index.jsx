@@ -8,28 +8,32 @@ import { ApplicationContext } from "../../App";
 import Header from "../../components/header";
 import Search from "../../components/search";
 import Pagination from "../../components/pagination";
+import Loader from "../../components/loader";
 
 export default function Home() {
-  const {notifySuccess, notifyError} = useContext(ApplicationContext);
+  const { notifySuccess, notifyError } = useContext(ApplicationContext);
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState("");
-
+  const [isLoading, setLoading] = useState(true);
   const [pages, setPages] = useState(0);
   const [pageSize, setPageSize] = useState(30);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(function getProducts() {
+    setLoading(true);
     getAll(currentPage, pageSize)
       .then((res) => {
         console.log(res);
         setProducts(res.data.products);
 
-        setPages(Math.ceil(res.data.total/pageSize));
+        setPages(Math.ceil(res.data.total / pageSize));
       })
       .catch((er) => {
         notifyError("Erro ao buscar produtos.")
         return { error: er, msg: "Erro ao buscar produtos na API." };
+      }).finally(() => {
+        setLoading(false);
       });
   }, [currentPage]);
 
@@ -37,9 +41,9 @@ export default function Home() {
     navigate("/new-product");
   }
 
-  function ShowProduct(product){
-    if(filter != ""){
-      if(!product.title.toLowerCase().includes(filter.toLowerCase())){
+  function ShowProduct(product) {
+    if (filter != "") {
+      if (!product.title.toLowerCase().includes(filter.toLowerCase())) {
         return;
       }
     }
@@ -50,12 +54,14 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Header></Header>
-      <Search setFilter={setFilter}></Search>
-      <Pagination pages={pages} currentPage={currentPage} setCurrentPage={(v)=>setCurrentPage(v)}></Pagination>
-      {products.map((product) => (
-        ShowProduct(product)
-      ))}
-      <button onClick={addProduct}>+</button>
+      <Loader showLoader={isLoading} />
+      {!isLoading ? (<><Search setFilter={setFilter}></Search>
+        <Pagination pages={pages} currentPage={currentPage} setCurrentPage={(v) => setCurrentPage(v)}></Pagination>
+        {products.map((product) => (
+          ShowProduct(product)
+        ))}
+        <button onClick={addProduct}>+</button>) </>) : ""
+      }
     </div>
   );
 }
