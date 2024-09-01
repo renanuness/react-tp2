@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { useNavigate } from "react-router-dom";
+import SaveProduct from "../saveProduct";
 
 export default function ProductCard(props) {
   const navigate = useNavigate();
@@ -12,45 +13,6 @@ export default function ProductCard(props) {
     navigate("/product/" + product.id);
   }
 
-  useEffect(() => {
-    if (isSaved()) {
-      setButtonStyle(savedStyle);
-    }
-  }, []);
-
-  function isSaved() {
-    let saved = JSON.parse(localStorage.getItem("@saved"));
-
-    if (saved && saved.length > 0) {
-      if (saved.includes(product.id)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  function save() {
-    if (isSaved()) {
-      removeSave();
-    } else {
-      let saved = JSON.parse(localStorage.getItem("@saved"));
-      if (saved == null) {
-        saved = [];
-      }
-      saved.push(product.id);
-      localStorage.setItem("@saved", JSON.stringify(saved));
-      setButtonStyle(savedStyle);
-    }
-  }
-
-  function removeSave() {
-    let saved = JSON.parse(localStorage.getItem("@saved"));
-    let news = saved.filter(p => p != product.id);
-    localStorage.setItem("@saved", JSON.stringify(news));
-    setButtonStyle("");
-  }
-
   return (
     <div className={styles.container}>
       <div className={styles.card} onClick={detail}>
@@ -60,7 +22,7 @@ export default function ProductCard(props) {
           <p>{product.price}</p>
         </div>
       </div>
-      <button onClick={save} className={saveButtonStyle}>Favoritar</button>
+      <SaveProduct product={product}></SaveProduct>
     </div>
   );
 }
