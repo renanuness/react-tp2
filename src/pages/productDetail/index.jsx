@@ -6,13 +6,14 @@ import styles from "./styles.module.css";
 import { ApplicationContext } from "../../App";
 import MyModal from "../../components/modal";
 import Header from "../../components/header";
+import SaveProduct from "../../components/saveProduct";
 
 
 export default function ProductDetail(props) {
   const { notifyError, notifySuccess } = useContext(ApplicationContext);
   const navigate = useNavigate();
   let { id } = useParams();
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(function getProduct() {
@@ -60,11 +61,12 @@ export default function ProductDetail(props) {
           <img src="" />
         )}
         <div>
-          <p>{product.title}</p>
-          {product.brand ? <p>{product.brand} </p> : ""}
-          <p>{product.description}</p>
-          <p>R$ {product.price}</p>
-          <p>Avaliação: {product.rating}</p>
+          <p>{product?.title}</p>
+          {product?.brand ? <p>{product.brand} </p> : ""}
+          <p>{product?.description}</p>
+          <p>R$ {product?.price}</p>
+          <p>Avaliação: {product?.rating}</p>
+          { product ? <SaveProduct product={product}></SaveProduct> : ""}
           <div className={styles.buttonsContainer}>
             <button className={styles.editBtn} onClick={edit}>
               Editar
