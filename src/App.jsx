@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import Home from "./pages/home";
 import ProductDetail from "./pages/productDetail";
 import NewProduct from "./pages/newProduct";
+import Saved from "./pages/saved";
 
 import "./App.css";
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "new-product/:id",
     element: <NewProduct></NewProduct>,
+  },
+  {
+    path: "saved",
+    element: <Saved></Saved>,
   },
 ]);
 
