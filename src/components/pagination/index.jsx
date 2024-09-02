@@ -16,7 +16,7 @@ export default function Pagination({pages, itemsPerPage, currentPage, setCurrent
         if(value == currentPage){
             btnClass = styles.selected;
         }
-        return (<button className={btnClass} onClick={()=>setCurrentPage(value)}>{value}</button>);
+        return (<button key={value} className={btnClass} onClick={()=>setCurrentPage(value)}>{value}</button>);
     }
     return(
         <div className={styles.container}>

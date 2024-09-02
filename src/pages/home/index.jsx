@@ -55,12 +55,15 @@ export default function Home() {
     <div className={styles.container}>
       <Header></Header>
       <Loader showLoader={isLoading} />
-      {!isLoading ? (<><Search setFilter={setFilter}></Search>
-        <Pagination pages={pages} currentPage={currentPage} setCurrentPage={(v) => setCurrentPage(v)}></Pagination>
-        {products.map((product) => (
-          ShowProduct(product)
-        ))}
-        <button onClick={addProduct}>+</button>) </>) : ""
+      {!isLoading ? (
+        <>
+          <Search setFilter={setFilter}></Search>
+          <Pagination pages={pages} currentPage={currentPage} setCurrentPage={(v) => setCurrentPage(v)}></Pagination>
+          {products.map((product) => (
+            ShowProduct(product)
+          ))}
+          <button onClick={addProduct}>+</button>)
+        </>) : ""
       }
     </div>
   );

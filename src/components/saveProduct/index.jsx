@@ -14,7 +14,11 @@ export default function SaveProduct(props){
   }, []);
 
   function isSaved() {
-    let saved = JSON.parse(localStorage.getItem("@saved"));
+    let savedValues = localStorage.getItem("@saved");
+    if(savedValues == null || savedValues == ""){
+      return false;
+    }
+    let saved = JSON.parse(savedValues);
 
     if (saved && saved.length > 0) {
       if (saved.includes(product.id)) {
@@ -29,10 +33,13 @@ export default function SaveProduct(props){
     if (isSaved()) {
       removeSave();
     } else {
-      let saved = JSON.parse(localStorage.getItem("@saved"));
-      if (saved == null) {
+      let saved = localStorage.getItem("@saved");
+      if(saved == null || saved == ""){
         saved = [];
+      }else{
+        saved = JSON.parse(localStorage.getItem("@saved"));
       }
+
       saved.push(product.id);
       localStorage.setItem("@saved", JSON.stringify(saved));
       setButtonStyle(savedStyle);

@@ -7,7 +7,7 @@ export default function Loader(props) {
     return (
         <div className={styles.container}>
             {show ?
-                <ReactLoading type={"balls"} color={"#fff"} height={'100%'} width={'400px'} />
+                <ReactLoading type={"balls"} color={"#454545"} height={'200px'} width={'400px'} />
                 : ""
             }
         </div>
