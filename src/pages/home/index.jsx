@@ -56,14 +56,14 @@ export default function Home() {
       <Header></Header>
       <Loader showLoader={isLoading} />
       {!isLoading ? (
-        <>
+        <div className={styles.productList}>
           <Search setFilter={setFilter}></Search>
           <Pagination pages={pages} currentPage={currentPage} setCurrentPage={(v) => setCurrentPage(v)}></Pagination>
           {products.map((product) => (
             ShowProduct(product)
           ))}
-          <button onClick={addProduct}>+</button>)
-        </>) : ""
+          <button className={styles.addBtn} onClick={addProduct}>+</button>)
+        </div>) : ""
       }
     </div>
   );
